@@ -1,45 +1,77 @@
-HANGMAN_ASCII_ART = """Welcome to the Hangman Game!
-                    \t __    __
-                    \t|  |  |  |
-                    \t|  |__|  | __ _ _ __   ___ _  _  ___  ___    __ _ _ ___
-                    \t|   __   |/ _` |  _ \\ / _ ` |  '_   `  _  \\ / _` | ' _ \\
-                    \t|  |  |  | (_| | | | | (_|  |  |  |  |  |  | (_| | |  | |
-                    \t|__|  |__|\\__,_|_| |_|\\__,  | _|  |__|  |__|\\__,_|_|  |_|
-                    \t\t\t               __/  |
-                    \t\t\t              |_____/"""
+#ACCOUNT_NUMBER
+#amount_of_money
 
-MAX_TRIES = 6
+# "Shuffle, Shuffle, Shuffle", say it together! Change colors and directions, Don't back down and stop the player! Do you want to play Taki? Press y\n
 
+# str1 = "\"Shuffle, Shuffle, Shuffle\", say it together!\nChange colors and directions,"
+# str2 = "\nDon't back down and stop the player!\n\tDo you want to play Taki? \n\tPress y\\n"
+# print(str1+str2)
 
-print(HANGMAN_ASCII_ART)
+# encrypted_message = "!XgXnXiXcXiXlXsX XnXoXhXtXyXpX XgXnXiXnXrXaXeXlX XmXaX XI"
+# print(str(encrypted_message[-1::-2]))
 
 
-# the rode stages
-stage_1 = "x-------x"
-stage_2 = stage_1 + "\n|\n|\n|\n|\n|"
-stage_3 = stage_1 + "\n|       |\n|       0\n|\n|\n|"
-stage_4 = stage_1 + "\n|       |\n|       0\n|       |\n|\n|"
-stage_5 = stage_1 + "\n|       |\n|       0\n|      /|\\\n|\n|"
-stage_6 = stage_1 + "\n|       |\n|       0\n|      /|\\\n|      / \n|"
-stage_7 = stage_1 + "\n|       |\n|       0\n|      /|\\\n|      / \\\n|"
+# str = input("Please enter a string: ")
+# new_str = str[1::]
+# new_text = new_str.replace(str[0], "e")
+#
+# print(str[0] + new_text)
 
-# print(stage_1)
-# print(stage_2)
-# print(stage_3)
-# print(stage_4)
-# print(stage_5)
-# print(stage_6)
-# print(stage_7)
+# str = input("Please enter a string: ")
+# size = len(str)
+# str_left = str[:(size//2)]
+# str_right = str[(size//2):]
+# print(str_left.lower() + str_right.upper())
+
+# #polindrom
+#
+# str = input("Enter a word: ")
+# str_new = str.lower()
+#
+# str_new = str_new.replace(' ' , '')
+#
+# if (str_new[:] == str_new[-1::-1]) :
+#     print("OK")
+# else:
+#     print("NOT")
 
 
-guess_word = input("Guess a word: (one word , no spaces) ")
+# # degrees
+#
+# str = input("Insert the temperature you would like to convert: ")
+# num_of_deg = float(str[:-1:1])
+# calc_deg = 0
+#
+# if str[-1] == 'F' or str[-1] == 'f':
+#     calc_deg = (5*num_of_deg - 160) / 9
+#     print("The new degree is:", calc_deg, "C")
+#
+# elif str[-1] == 'C' or str[-1] == 'c':
+#         calc_deg = (9 * num_of_deg + 160) / 5
+#         print("The new degree is:", calc_deg, " F")
 
-size_word = len(guess_word)
 
-print("_ "*size_word)
+from datetime import datetime
 
-guess_input = input("Guess a letter: ")
+date_input = input("Enter a date (YYYY-MM-DD): ")
 
-guess_input = guess_input.lower()
+date_obj = datetime.strptime(date_input, '%Y-%m-%d')
 
-print(guess_input)
+day_of_week = date_obj.weekday()
+
+if (day_of_week == 6):
+    day_of_week = 'Sunday'
+elif (day_of_week == 0):
+    day_of_week = 'Monday'
+elif (day_of_week == 1):
+    day_of_week = 'Tuesday'
+elif (day_of_week == 2):
+    day_of_week = 'Wednesday'
+elif (day_of_week == 3):
+    day_of_week = 'Thursday'
+elif (day_of_week == 4):
+    day_of_week = 'Friday'
+elif (day_of_week == 5):
+    day_of_week = 'Saturday'
+
+print(f"The day of the week for {date_input} is {day_of_week}.")
