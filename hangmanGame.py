@@ -10,47 +10,68 @@ HANGMAN_ASCII_ART = """Welcome to the Hangman Game!
 
 MAX_TRIES = 6
 
-
 print(HANGMAN_ASCII_ART)
 
 
 # the rode stages
-stage_1 = "x-------x"
-stage_2 = stage_1 + "\n|\n|\n|\n|\n|"
-stage_3 = stage_1 + "\n|       |\n|       0\n|\n|\n|"
-stage_4 = stage_1 + "\n|       |\n|       0\n|       |\n|\n|"
-stage_5 = stage_1 + "\n|       |\n|       0\n|      /|\\\n|\n|"
-stage_6 = stage_1 + "\n|       |\n|       0\n|      /|\\\n|      / \n|"
-stage_7 = stage_1 + "\n|       |\n|       0\n|      /|\\\n|      / \\\n|"
+HANGMAN_PHOTOS = {
+    "1": "x-------x",
+    "2": "x-------x\n|\n|\n|\n|\n|",
+    "3": "x-------x\n|       |\n|       0\n|\n|\n|",
+    "4": "x-------x\n|       |\n|       0\n|       |\n|\n|",
+    "5": "x-------x\n|       |\n|       0\n|      /|\\\n|\n|",
+    "6": "x-------x\n|       |\n|       0\n|      /|\\\n|      / \n|",
+    "7": "x-------x\n|       |\n|       0\n|      /|\\\n|      / \\\n|"
+}
 
-# print(stage_1)
-# print(stage_2)
-# print(stage_3)
-# print(stage_4)
-# print(stage_5)
-# print(stage_6)
-# print(stage_7)
-
-
-guess_word = input("Guess a word: (one word , no spaces) ")
+guess_word = input("Guess a word (one word , no spaces) : ")
 
 size_word = len(guess_word)
 
-print("_ "*size_word)
+print("_ " * size_word)
 
 guess_input = input("Guess a letter: ")
 
-guess_input = guess_input.lower()
+
+def check_valid_input(letter_guessed, old_letters_guessed):
+    letter_guessed = letter_guessed.lower()
+    if len(letter_guessed) == 1 and letter_guessed.isalpha() and not (letter_guessed in old_letters_guessed):
+        return True
+    return False
 
 
-size_guess_char = len(guess_input)
+def try_update_letter_guessed(letter_guessed, old_letters_guessed):
+    letter_guessed = letter_guessed.lower()
+
+    if (check_valid_input(letter_guessed, old_letters_guessed)):
+        old_letters_guessed.append(letter_guessed)
+        print("Add successfully.")
+        return True
+
+    else:
+        print("X\n" + ' -> '.join(sorted(old_letters_guessed)))
+        return False
 
 
-if (size_guess_char > 1) and not(guess_input.isalpha()):
-    print("E3")
-elif not(guess_input.isalpha()):
-    print("E2")
-elif size_guess_char > 1:
-    print("E1")
-else:
-    print(guess_input)
+def show_hidden_word(secret_word, old_letters_guessed):
+    str_res = list("_" * len(secret_word))
+    for i in old_letters_guessed:
+        if i in secret_word:
+            temp = []
+            for pos, char in enumerate(secret_word):
+                if char == i:
+                    temp.append(pos)
+            for index in temp:
+                str_res[index] = i
+
+    return " ".join(str_res)
+
+
+def check_win(secret_word, old_letters_guessed):
+    temp = show_hidden_word(secret_word, old_letters_guessed)
+    temp = temp.replace(" ", "")
+    return temp == secret_word
+
+
+def print_hangman(num_of_tries):
+    print(HANGMAN_PHOTOS[str(num_of_tries)])
